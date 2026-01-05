@@ -17,7 +17,7 @@
             overflow: hidden; 
         }
 
-        /* FULL WIDTH BACKGROUND - Stays side-by-side on mobile */
+        /* FULL WIDTH BACKGROUND - Spans both sides */
         .site-container {
             position: relative;
             height: 100vh;
@@ -29,9 +29,9 @@
             align-items: center;
         }
 
-        /* FLOATING VERTICAL BANNER - Matches Ridgely Mobile Split */
-        .content-banner {
-            width: clamp(48%, 40%, 42%); 
+        /* VERTICAL SPLIT PANEL - Professional Side-by-Side */
+        .content-panel {
+            width: 42%; 
             height: 100%;
             background: #fff;
             display: flex;
@@ -40,14 +40,13 @@
             padding: 0 5%;
             position: relative;
             z-index: 10;
-            margin-left: clamp(0%, 8%, 10%);
-            box-shadow: 15px 0 45px rgba(0,0,0,0.15);
+            box-shadow: 10px 0 40px rgba(0,0,0,0.15);
         }
 
-        /* REFINED LOGO - Professional Scale for Mobile */
+        /* REFINED LOGO - Moved Up for Mobile */
         .logo-wrap {
             position: absolute;
-            top: clamp(45px, 8vh, 75px);
+            top: clamp(40px, 8vh, 75px);
             left: 12%;
             display: grid;
             grid-template-columns: repeat(2, clamp(26px, 4vw, 36px));
@@ -66,7 +65,7 @@
             border-radius: 6px;
         }
 
-        /* TAGLINE - Shrinks for mobile to prevent overflow */
+        /* TAGLINE - Adjusted for Mobile Positioning */
         .tagline {
             font-size: clamp(16px, 2.2vw, 22px);
             line-height: 1.5;
@@ -74,12 +73,14 @@
             font-weight: 300;
             max-width: 90%;
             letter-spacing: -0.4px;
+            /* Move text up slightly on mobile */
+            margin-top: -20px;
         }
 
         /* UI ELEMENTS */
         .hamburger {
             position: absolute;
-            top: clamp(45px, 8vh, 75px);
+            top: clamp(40px, 8vh, 75px);
             right: clamp(25px, 5vw, 60px);
             cursor: pointer;
             z-index: 1000;
@@ -100,7 +101,7 @@
         .menu-active .bar:nth-child(1) { transform: translateY(4px) rotate(45deg); }
         .menu-active .bar:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 
-        /* NAVIGATION OVERLAY - Fixed Text Restoration */
+        /* OVERLAY NAVIGATION */
         .nav-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -167,9 +168,20 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
+        /* MOBILE SPECIFIC OVERRIDES */
         @media (max-width: 1024px) {
+            .content-panel { width: 50%; } /* Clean split for phone */
             .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
-            .section-title { margin-bottom: 10px; }
+            .tagline { margin-top: -60px; } /* Pull text higher on mobile */
+        }
+
+        /* DESKTOP RIDGELY MARGINS (min-width: 1025px) */
+        @media (min-width: 1025px) {
+            .content-panel { 
+                width: 38%; 
+                margin-left: 10%; 
+                box-shadow: -15px 0 45px rgba(0,0,0,0.15), 15px 0 45px rgba(0,0,0,0.15); 
+            }
         }
     </style>
 </head>
@@ -177,7 +189,7 @@
 
     <div class="site-container">
         
-        <div class="content-banner">
+        <div class="content-panel">
             <div class="logo-wrap">
                 <div class="logo-item">M</div>
                 <div class="logo-item">C</div>
