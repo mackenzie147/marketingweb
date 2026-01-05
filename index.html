@@ -36,22 +36,21 @@
             background: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Desktop centered */
             padding: 0 5%;
             position: relative;
             z-index: 10;
             box-shadow: 10px 0 40px rgba(0,0,0,0.15);
         }
 
-        /* --- LOGO: Proportional & Scaled --- */
+        /* --- LOGO --- */
         .logo-wrap {
             position: absolute;
             top: clamp(45px, 8vh, 75px);
             left: 12%;
             display: grid;
-            /* Smaller dimensions for a cleaner look */
             grid-template-columns: repeat(2, clamp(26px, 3.5vw, 36px));
-            grid-template-rows: repeat(2, clamp(26px, 3.5vw, 36px));
+            grid-template-rows: repeat(2, 3.5vw, 36px);
             gap: 5px;
         }
 
@@ -66,7 +65,7 @@
             border-radius: 6px;
         }
 
-        /* --- TAGLINE: Fluid Typography --- */
+        /* --- TAGLINE --- */
         .tagline {
             font-size: clamp(16px, 2vw, 22px);
             line-height: 1.5;
@@ -167,22 +166,22 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
-        /* --- MOBILE REFINEMENTS --- */
+        /* --- UPDATED MOBILE REFINEMENTS --- */
         @media (max-width: 1024px) {
             .content-panel { 
-                width: 48%; /* Split ratio per Ridgely Walsh */
-                justify-content: flex-start; /* Move text up */
-                padding-top: clamp(140px, 20vh, 180px); 
+                width: 48%; 
+                justify-content: flex-start; /* Aligns content to top */
+                padding-top: 130px; /* Precise top clearance for logo/tagline */
             } 
             .logo-wrap {
-                top: clamp(40px, 8vh, 60px); 
+                top: 40px; /* Logo shifted higher on mobile */
                 left: 10%;
             }
-            .tagline { margin-top: -10px; }
+            .hamburger { top: 40px; right: 20px; }
+            .tagline { margin-top: 0; } /* Reset for top alignment */
             .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
         }
 
-        /* --- DESKTOP MARGINS --- */
         @media (min-width: 1025px) {
             .content-panel { 
                 width: 38%; 
