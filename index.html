@@ -17,7 +17,7 @@
             overflow: hidden; 
         }
 
-        /* FULL WIDTH BACKGROUND - Spans both sides */
+        /* --- FULL WIDTH BACKGROUND --- */
         .site-container {
             position: relative;
             height: 100vh;
@@ -29,28 +29,28 @@
             align-items: center;
         }
 
-        /* VERTICAL SPLIT PANEL - Professional Side-by-Side */
+        /* --- CONTENT PANEL --- */
         .content-panel {
             width: 42%; 
             height: 100%;
             background: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Center vertically for desktop */
             padding: 0 5%;
             position: relative;
             z-index: 10;
             box-shadow: 10px 0 40px rgba(0,0,0,0.15);
         }
 
-        /* REFINED LOGO - Moved Up for Mobile */
+        /* --- LOGO --- */
         .logo-wrap {
             position: absolute;
-            top: clamp(40px, 8vh, 75px);
+            top: 75px;
             left: 12%;
             display: grid;
-            grid-template-columns: repeat(2, clamp(26px, 4vw, 36px));
-            grid-template-rows: repeat(2, clamp(26px, 4vw, 36px));
+            grid-template-columns: repeat(2, 36px);
+            grid-template-rows: repeat(2, 36px);
             gap: 5px;
         }
 
@@ -61,27 +61,25 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: clamp(11px, 2vw, 15px);
+            font-size: 15px;
             border-radius: 6px;
         }
 
-        /* TAGLINE - Adjusted for Mobile Positioning */
+        /* --- TAGLINE --- */
         .tagline {
-            font-size: clamp(16px, 2.2vw, 22px);
+            font-size: 22px;
             line-height: 1.5;
             color: #1a1a1a;
             font-weight: 300;
             max-width: 90%;
             letter-spacing: -0.4px;
-            /* Move text up slightly on mobile */
-            margin-top: -20px;
         }
 
-        /* UI ELEMENTS */
+        /* --- UI ELEMENTS --- */
         .hamburger {
             position: absolute;
-            top: clamp(40px, 8vh, 75px);
-            right: clamp(25px, 5vw, 60px);
+            top: 75px;
+            right: 60px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
@@ -90,7 +88,7 @@
         }
 
         .bar {
-            width: clamp(26px, 3.5vw, 32px);
+            width: 32px;
             height: 1px;
             background-color: #fff;
             transition: 0.4s ease;
@@ -101,7 +99,7 @@
         .menu-active .bar:nth-child(1) { transform: translateY(4px) rotate(45deg); }
         .menu-active .bar:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 
-        /* OVERLAY NAVIGATION */
+        /* --- OVERLAY NAVIGATION --- */
         .nav-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -152,7 +150,7 @@
             cursor: pointer;
         }
 
-        /* ORANGE PRIVACY BANNER */
+        /* --- ORANGE PRIVACY BANNER --- */
         .privacy-bar {
             position: fixed;
             bottom: 0; width: 100%;
@@ -160,7 +158,7 @@
             color: #000;
             padding: 15px 0;
             text-align: center;
-            font-size: clamp(8px, 1.5vw, 10px);
+            font-size: 10px;
             z-index: 1001;
             font-weight: 600;
             box-shadow: 0 -8px 25px rgba(0,0,0,0.2);
@@ -168,14 +166,26 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
-        /* MOBILE SPECIFIC OVERRIDES */
+        /* --- MOBILE SPECIFIC OVERRIDES --- */
         @media (max-width: 1024px) {
-            .content-panel { width: 50%; } /* Clean split for phone */
+            .content-panel { 
+                width: 50%; 
+                justify-content: flex-start; /* Move text up to the top */
+                padding-top: 160px; /* Space for the logo */
+            } 
+            .logo-wrap {
+                top: 40px; /* Move logo up on mobile */
+                left: 10%;
+                grid-template-columns: repeat(2, 30px);
+                grid-template-rows: repeat(2, 30px);
+            }
+            .logo-item { font-size: 12px; }
+            .tagline { font-size: 18px; }
+            .hamburger { top: 40px; right: 25px; }
             .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
-            .tagline { margin-top: -60px; } /* Pull text higher on mobile */
         }
 
-        /* DESKTOP RIDGELY MARGINS (min-width: 1025px) */
+        /* DESKTOP RIDGELY MARGINS */
         @media (min-width: 1025px) {
             .content-panel { 
                 width: 38%; 
@@ -188,7 +198,6 @@
 <body>
 
     <div class="site-container">
-        
         <div class="content-panel">
             <div class="logo-wrap">
                 <div class="logo-item">M</div>
@@ -206,7 +215,6 @@
             <div class="bar"></div>
             <div class="bar"></div>
         </div>
-
     </div>
 
     <div class="nav-overlay" id="navPanel">
