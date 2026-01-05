@@ -36,16 +36,16 @@
             background: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Alignment from top */
+            justify-content: flex-start; 
             padding: 0 8%;
             position: relative;
             z-index: 10;
             box-shadow: 10px 0 40px rgba(0,0,0,0.08);
         }
 
-        /* --- LOGO: PROFESSIONAL ALIGNMENT --- */
+        /* --- LOGO: DESKTOP ALIGNMENT --- */
         .logo-wrap {
-            margin-top: 100px; /* Professional clearance from top */
+            margin-top: 115px; /* Lowered slightly for desktop balance */
             display: grid;
             grid-template-columns: repeat(2, 36px); 
             grid-template-rows: repeat(2, 36px);
@@ -64,16 +64,15 @@
             border-radius: 8px;
         }
 
-        /* --- TAGLINE: SHARED AXIS ALIGNMENT --- */
+        /* --- TAGLINE: DESKTOP ALIGNMENT --- */
         .tagline {
-            margin-top: 60px; /* Increased space between logo and text */
+            margin-top: 65px; /* Proportional gap restored */
             font-size: 22px;
             line-height: 1.6;
             color: #1a1a1a;
             font-weight: 300;
             max-width: 360px;
             letter-spacing: -0.4px;
-            /* No margin-left here creates the shared vertical axis */
         }
 
         /* --- UI ELEMENTS --- */
@@ -100,7 +99,7 @@
         .menu-active .bar:nth-child(1) { transform: translateY(4px) rotate(45deg); }
         .menu-active .bar:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 
-        /* --- OVERLAY NAV --- */
+        /* --- NAVIGATION OVERLAY --- */
         .nav-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -141,20 +140,24 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
-        /* --- MOBILE REFINEMENTS --- */
+        /* --- MOBILE REFINEMENTS: SMALLER & HIGHER --- */
         @media (max-width: 1024px) {
             .content-panel { 
                 width: 48%; 
-                padding-top: 80px; 
+                padding-top: 50px; /* Shifted UP further */
             } 
             .logo-wrap {
                 margin-top: 0;
-                grid-template-columns: repeat(2, 28px);
+                grid-template-columns: repeat(2, 28px); /* Proportional shrink */
                 grid-template-rows: repeat(2, 28px);
                 gap: 5px;
             }
             .logo-item { font-size: 12px; border-radius: 5px; }
-            .tagline { font-size: 17px; margin-top: 40px; }
+            .tagline { 
+                font-size: 16.5px; /* Slightly smaller text */
+                margin-top: 35px; /* Tighter mobile gap */
+                line-height: 1.5;
+            }
             .hamburger { top: 40px; right: 20px; }
             .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
         }
