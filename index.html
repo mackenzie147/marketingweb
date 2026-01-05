@@ -36,22 +36,21 @@
             background: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Desktop Centered */
-            padding: 0 5%;
+            justify-content: flex-start; /* Alignment from top */
+            padding: 0 8%;
             position: relative;
             z-index: 10;
-            box-shadow: 10px 0 40px rgba(0,0,0,0.15);
+            box-shadow: 10px 0 40px rgba(0,0,0,0.08);
         }
 
-        /* --- LOGO: Fixed Proportions --- */
+        /* --- LOGO: PROFESSIONAL ALIGNMENT --- */
         .logo-wrap {
-            position: absolute;
-            top: 75px;
-            left: 12%;
+            margin-top: 100px; /* Professional clearance from top */
             display: grid;
-            grid-template-columns: repeat(2, 38px); /* Desktop Size */
-            grid-template-rows: repeat(2, 38px);
+            grid-template-columns: repeat(2, 36px); 
+            grid-template-rows: repeat(2, 36px);
             gap: 6px;
+            width: fit-content;
         }
 
         .logo-item {
@@ -61,18 +60,20 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
-            border-radius: 7px;
+            font-size: 15px;
+            border-radius: 8px;
         }
 
-        /* --- TAGLINE --- */
+        /* --- TAGLINE: SHARED AXIS ALIGNMENT --- */
         .tagline {
+            margin-top: 60px; /* Increased space between logo and text */
             font-size: 22px;
-            line-height: 1.5;
+            line-height: 1.6;
             color: #1a1a1a;
             font-weight: 300;
-            max-width: 90%;
+            max-width: 360px;
             letter-spacing: -0.4px;
+            /* No margin-left here creates the shared vertical axis */
         }
 
         /* --- UI ELEMENTS --- */
@@ -124,32 +125,6 @@
             gap: 60px;
         }
 
-        .section-title { font-size: 10px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-bottom: 20px; }
-        .about-text p { font-size: 16px; line-height: 1.6; font-weight: 300; color: #000; margin-bottom: 15px; }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid #ddd;
-            padding: 12px 0;
-            margin-bottom: 20px;
-            outline: none;
-            font-family: inherit;
-            font-size: 14px;
-            color: #000;
-        }
-
-        .btn-submit {
-            background: #000;
-            color: #fff;
-            padding: 10px 30px;
-            border: none;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
         /* --- ORANGE PRIVACY BAR --- */
         .privacy-bar {
             position: fixed;
@@ -161,7 +136,7 @@
             font-size: 10px;
             z-index: 1001;
             font-weight: 600;
-            box-shadow: 0 -8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 -8px 25px rgba(0,0,0,0.12);
         }
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
@@ -170,21 +145,16 @@
         @media (max-width: 1024px) {
             .content-panel { 
                 width: 48%; 
-                justify-content: flex-start; /* Move text up to the top */
-                padding-top: 130px; 
+                padding-top: 80px; 
             } 
             .logo-wrap {
-                top: 40px; /* Logo high at the top */
-                left: 10%;
-                grid-template-columns: repeat(2, 30px); /* Scaled down proportionally */
-                grid-template-rows: repeat(2, 30px);
+                margin-top: 0;
+                grid-template-columns: repeat(2, 28px);
+                grid-template-rows: repeat(2, 28px);
                 gap: 5px;
             }
-            .logo-item { font-size: 13px; }
-            .tagline { 
-                font-size: 17px; /* Scaled down text */
-                margin-top: 10px; 
-            }
+            .logo-item { font-size: 12px; border-radius: 5px; }
+            .tagline { font-size: 17px; margin-top: 40px; }
             .hamburger { top: 40px; right: 20px; }
             .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
         }
@@ -194,7 +164,7 @@
             .content-panel { 
                 width: 38%; 
                 margin-left: 10%; 
-                box-shadow: -15px 0 45px rgba(0,0,0,0.15), 15px 0 45px rgba(0,0,0,0.15); 
+                box-shadow: -15px 0 45px rgba(0,0,0,0.12), 15px 0 45px rgba(0,0,0,0.12); 
             }
         }
     </style>
@@ -224,18 +194,18 @@
     <div class="nav-overlay" id="navPanel">
         <div class="overlay-inner">
             <div class="about-text">
-                <h2 class="section-title">The Firm</h2>
-                <p>MCKD is not a traditional agency.</p>
-                <p>We support a new era of creators and journalists in the new era of communications.</p>
+                <h2 style="font-size: 10px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-bottom: 20px;">The Firm</h2>
+                <p style="font-size: 16px; line-height: 1.6; font-weight: 300; margin-bottom: 15px;">MCKD is not a traditional agency.</p>
+                <p style="font-size: 16px; line-height: 1.6; font-weight: 300;">We support a new era of creators and journalists in the new era of communications.</p>
             </div>
 
             <div class="contact-form">
-                <h2 class="section-title">Inquiries</h2>
+                <h2 style="font-size: 10px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-bottom: 20px;">Inquiries</h2>
                 <form action="mailto:partners@mckd.com" method="post" enctype="text/plain">
-                    <input type="text" placeholder="Full Name" required>
-                    <input type="email" placeholder="Business Email" required>
-                    <textarea rows="3" placeholder="Describe your objectives"></textarea>
-                    <button type="submit" class="btn-submit">Submit</button>
+                    <input type="text" placeholder="Full Name" style="width:100%; border:none; border-bottom:1px solid #ddd; padding:12px 0; margin-bottom:20px; outline:none; font-family:inherit;">
+                    <input type="email" placeholder="Business Email" style="width:100%; border:none; border-bottom:1px solid #ddd; padding:12px 0; margin-bottom:20px; outline:none; font-family:inherit;">
+                    <textarea rows="3" placeholder="Describe your objectives" style="width:100%; border:none; border-bottom:1px solid #ddd; padding:12px 0; margin-bottom:20px; outline:none; font-family:inherit;"></textarea>
+                    <button type="submit" style="background:#000; color:#fff; padding:10px 30px; border:none; font-size:10px; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">Submit</button>
                 </form>
             </div>
         </div>
