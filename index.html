@@ -43,14 +43,14 @@
             box-shadow: 10px 0 40px rgba(0,0,0,0.15);
         }
 
-        /* --- FIXED LOGO SIZE (PREVENTS SHRINKING) --- */
+        /* --- LOGO: Fixed Proportions --- */
         .logo-wrap {
             position: absolute;
             top: 75px;
             left: 12%;
             display: grid;
-            grid-template-columns: repeat(2, 38px); /* Restored Size */
-            grid-template-rows: repeat(2, 38px);    /* Restored Size */
+            grid-template-columns: repeat(2, 38px); /* Desktop Size */
+            grid-template-rows: repeat(2, 38px);
             gap: 6px;
         }
 
@@ -150,7 +150,7 @@
             cursor: pointer;
         }
 
-        /* --- PRIVACY BAR --- */
+        /* --- ORANGE PRIVACY BAR --- */
         .privacy-bar {
             position: fixed;
             bottom: 0; width: 100%;
@@ -166,21 +166,25 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
-        /* --- MOBILE UPDATES: MOVE LOGO/TEXT UP --- */
+        /* --- MOBILE REFINEMENTS --- */
         @media (max-width: 1024px) {
             .content-panel { 
                 width: 48%; 
-                justify-content: flex-start; /* Pulls text UP */
-                padding-top: 110px; /* Reduced space between logo and text */
+                justify-content: flex-start; /* Move text up to the top */
+                padding-top: 130px; 
             } 
             .logo-wrap {
-                top: 40px; /* Moved logo higher */
+                top: 40px; /* Logo high at the top */
                 left: 10%;
-                grid-template-columns: repeat(2, 34px); /* Slightly scaled but legible */
-                grid-template-rows: repeat(2, 34px);
+                grid-template-columns: repeat(2, 30px); /* Scaled down proportionally */
+                grid-template-rows: repeat(2, 30px);
+                gap: 5px;
             }
-            .logo-item { font-size: 14px; }
-            .tagline { font-size: 18px; margin-top: 20px; }
+            .logo-item { font-size: 13px; }
+            .tagline { 
+                font-size: 17px; /* Scaled down text */
+                margin-top: 10px; 
+            }
             .hamburger { top: 40px; right: 20px; }
             .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
         }
