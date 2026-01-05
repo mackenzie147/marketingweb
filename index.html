@@ -16,10 +16,10 @@
             background-color: #fff;
             color: #000;
             -webkit-font-smoothing: antialiased;
-            overflow: hidden; /* Rigidly locked for agency aesthetic */
+            overflow: hidden; /* Agency style viewport lock */
         }
 
-        /* FULL WIDTH BACKGROUND IMAGE */
+        /* FULL WIDTH BACKGROUND */
         .site-container {
             position: relative;
             height: 100vh;
@@ -28,56 +28,57 @@
             background-size: cover;
             background-position: center;
             display: flex;
+            align-items: center;
         }
 
-        /* WHITE CONTENT BLOCK (Floating Layer) */
-        .content-overlay {
-            width: 42%;
+        /* FLOATING VERTICAL BANNER - With Side Shadows */
+        .content-banner {
+            width: 38%; 
             height: 100%;
             background: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 8%;
+            padding: 0 6%;
             position: relative;
-            z-index: 5;
-            box-shadow: 10px 0 50px rgba(0,0,0,0.1);
+            z-index: 10;
+            margin-left: 10%; /* Creates the left-side image gutter */
+            /* Enhanced shadows on both sides to separate from image */
+            box-shadow: -15px 0 45px rgba(0,0,0,0.15), 15px 0 45px rgba(0,0,0,0.15);
         }
 
-        /* PROFESSIONAL METALLIC LOGO */
+        /* REFINED LOGO */
         .logo-wrap {
             position: absolute;
-            top: 50px;
-            left: 8%;
+            top: 60px;
+            left: 15.5%;
             display: grid;
-            grid-template-columns: repeat(2, 40px);
-            grid-template-rows: repeat(2, 40px);
-            gap: 6px;
+            grid-template-columns: repeat(2, 34px);
+            grid-template-rows: repeat(2, 34px);
+            gap: 5px;
         }
 
-        .logo-wrap div {
-            /* Metallic depth effect */
-            background: linear-gradient(145deg, #222, #000);
+        .logo-grid-item {
+            background-color: #000;
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 18px;
-            border-radius: 8px;
-            box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+            font-size: 14px;
+            border-radius: 7px;
         }
 
         .tagline {
-            font-size: 24px;
-            line-height: 1.5;
+            font-size: 22px;
+            line-height: 1.6;
             color: #1a1a1a;
             font-weight: 300;
-            max-width: 420px;
-            letter-spacing: -0.5px;
+            max-width: 360px;
+            letter-spacing: -0.4px;
         }
 
-        /* --- UI ELEMENTS --- */
+        /* UI ELEMENTS */
         .hamburger {
             position: absolute;
             top: 70px;
@@ -89,20 +90,19 @@
             gap: 8px;
         }
 
-        .menu-bar {
-            width: 32px;
+        .bar {
+            width: 30px;
             height: 1px;
-            background-color: #fff; /* White bars for photo visibility */
-            transition: 0.4s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+            background-color: #fff;
+            transition: 0.4s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
 
-        /* Transition to black when overlay menu is active */
-        .menu-open .menu-bar { background-color: #000; box-shadow: none; }
-        .menu-open .menu-bar:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
-        .menu-open .menu-bar:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
+        .menu-active .bar { background-color: #000; box-shadow: none; }
+        .menu-active .bar:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+        .menu-active .bar:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
 
-        /* --- FULL SCREEN NAV OVERLAY --- */
+        /* OVERLAY MENU */
         .nav-overlay {
             position: fixed;
             top: 0;
@@ -119,69 +119,56 @@
             transition: opacity 0.5s ease;
         }
 
-        .nav-overlay.active { opacity: 1; visibility: visible; }
+        .nav-overlay.visible { opacity: 1; visibility: visible; }
 
-        .overlay-content {
+        .overlay-inner {
             display: grid;
             grid-template-columns: 1.2fr 1fr;
-            width: 85%;
-            max-width: 1200px;
+            width: 80%;
+            max-width: 1100px;
             gap: 100px;
         }
 
-        .about-section h2, .contact-section h2 { 
-            font-size: 11px; 
-            letter-spacing: 2px; 
-            color: #999; 
-            text-transform: uppercase; 
-            margin-bottom: 30px; 
-        }
+        .section-label { font-size: 11px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-bottom: 25px; }
+        .about-text p { font-size: 17px; line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
 
-        .about-section p { font-size: 18px; line-height: 1.7; font-weight: 300; margin-bottom: 20px; }
-
-        .contact-section input, .contact-section textarea {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-            margin-bottom: 25px;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .submit-btn {
-            background: #000;
-            color: #fff;
-            padding: 12px 35px;
-            border: none;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        /* --- PRIVACY BANNER --- */
+        /* PRIVACY BANNER - Orange with Shadow & Close Button */
         .privacy-banner {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(20, 20, 20, 0.98);
-            color: #777;
-            padding: 15px 0;
+            background: #ff9d00; /* Vibrant Skyline Orange */
+            color: #000;
+            padding: 18px 0;
             text-align: center;
             font-size: 10px;
             z-index: 1001;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            /* Shadow to lift it off the photo */
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
-        .privacy-banner a { color: #fff; text-decoration: underline; }
+        .privacy-banner a { color: #000; text-decoration: underline; font-weight: 700; }
 
-        /* RESPONSIVENESS */
+        .close-banner {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 300;
+            padding: 5px;
+        }
+
+        /* Mobile Adjustments */
         @media (max-width: 1024px) {
             .site-container { flex-direction: column; overflow-y: auto; height: auto; }
-            .content-overlay { width: 100%; height: auto; padding: 140px 10% 80px; box-shadow: none; }
-            .site-container { background-position: top; }
-            .overlay-content { grid-template-columns: 1fr; gap: 60px; padding: 100px 0; }
+            .content-banner { width: 100%; margin-left: 0; padding: 140px 10% 80px; box-shadow: none; }
             .hamburger { right: 30px; top: 30px; }
+            .overlay-inner { grid-template-columns: 1fr; gap: 50px; padding: 100px 0; }
         }
     </style>
 </head>
@@ -189,10 +176,12 @@
 
     <div class="site-container">
         
-        <div class="content-overlay">
+        <div class="content-banner">
             <div class="logo-wrap">
-                <div>M</div><div>C</div>
-                <div>K</div><div>D</div>
+                <div class="logo-grid-item">M</div>
+                <div class="logo-grid-item">C</div>
+                <div class="logo-grid-item">K</div>
+                <div class="logo-grid-item">D</div>
             </div>
 
             <p class="tagline">
@@ -200,46 +189,56 @@
             </p>
         </div>
 
-        <div class="hamburger" id="menuBtn">
-            <div class="menu-bar"></div>
-            <div class="menu-bar"></div>
+        <div class="hamburger" id="navBtn">
+            <div class="bar"></div>
+            <div class="bar"></div>
         </div>
 
     </div>
 
-    <div class="nav-overlay" id="overlay">
-        <div class="overlay-content">
-            <div class="about-section">
-                <h2>The Firm</h2>
+    <div class="nav-overlay" id="navPanel">
+        <div class="overlay-inner">
+            <div class="about-text">
+                <h2 class="section-label">The Firm</h2>
                 <p>MCKD is not a traditional agency.</p>
                 <p>We support a new era of creators and journalists in the new era of communications.</p>
                 <p>We work at a global scale, partnering with transformational assets.</p>
             </div>
 
-            <div class="contact-section">
-                <h2>Inquiries</h2>
+            <div class="contact-form">
+                <h2 class="section-label">Inquiries</h2>
                 <form action="mailto:partners@mckd.com" method="post" enctype="text/plain">
-                    <input type="text" placeholder="Full Name" required>
-                    <input type="email" placeholder="Business Email" required>
-                    <textarea rows="4" placeholder="Briefly describe your current scale and goals"></textarea>
-                    <button type="submit" class="submit-btn">Submit Inquiry</button>
+                    <input type="text" placeholder="Full Name" style="width:100%; border:none; border-bottom:1px solid #eee; padding:15px 0; margin-bottom:25px; outline:none; font-family:inherit;">
+                    <input type="email" placeholder="Business Email" style="width:100%; border:none; border-bottom:1px solid #eee; padding:15px 0; margin-bottom:25px; outline:none; font-family:inherit;">
+                    <textarea rows="4" placeholder="Briefly describe your objectives" style="width:100%; border:none; border-bottom:1px solid #eee; padding:15px 0; margin-bottom:25px; outline:none; font-family:inherit;"></textarea>
+                    <button type="submit" style="background:#000; color:#fff; padding:12px 40px; border:none; font-size:11px; letter-spacing:2px; text-transform:uppercase; cursor:pointer;">Submit Inquiry</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <div class="privacy-banner">
+    <div class="privacy-banner" id="cookieBanner">
         This website uses cookies to offer you a better browsing experience. By using this site, you consent to our use of cookies. <a href="#">Privacy Policy</a>
+        <span class="close-banner" onclick="closeBanner()">✕</span>
     </div>
 
     <script>
-        const btn = document.getElementById('menuBtn');
-        const overlay = document.getElementById('overlay');
+        const btn = document.getElementById('navBtn');
+        const overlay = document.getElementById('navPanel');
+        const banner = document.getElementById('cookieBanner');
 
+        // Toggle Overlay
         btn.addEventListener('click', () => {
-            btn.classList.toggle('menu-open');
-            overlay.classList.toggle('active');
+            btn.classList.toggle('menu-active');
+            overlay.classList.toggle('visible');
         });
+
+        // Close Privacy Banner
+        function closeBanner() {
+            banner.style.opacity = '0';
+            banner.style.transform = 'translateY(100%)';
+            setTimeout(() => { banner.style.display = 'none'; }, 400);
+        }
     </script>
 </body>
 </html>
