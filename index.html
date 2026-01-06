@@ -14,10 +14,10 @@
             font-family: 'Inter', sans-serif;
             background-color: #fff;
             -webkit-font-smoothing: antialiased;
-            overflow: hidden; 
+            overflow-x: hidden; 
         }
 
-        /* Subtle Texture Overlay for a "premium paper" feel */
+        /* Subtle Texture Overlay for Desktop Polish */
         body::before {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -25,7 +25,7 @@
             opacity: 0.04; pointer-events: none; z-index: 999;
         }
 
-        /* --- BACKGROUND --- */
+        /* --- SHARED BACKGROUND --- */
         .site-container {
             position: relative;
             height: 100vh;
@@ -35,78 +35,128 @@
             background-position: 75% center; 
             display: flex;
             align-items: center;
-            animation: fadeInBg 1.5s ease-out;
         }
 
-        /* --- CONTENT PANEL ENTRANCE --- */
-        .content-panel {
-            width: 42%; 
-            height: 100%;
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            padding: 0 8%;
-            position: relative;
-            z-index: 10;
-            box-shadow: 10px 0 40px rgba(0,0,0,0.08);
+        /* --- DESKTOP STYLES (New Animated Look) --- */
+        @media (min-width: 1025px) {
+            .content-panel {
+                width: 42%; 
+                height: 100%;
+                background: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center; 
+                padding: 0 8%;
+                position: relative;
+                z-index: 10;
+                box-shadow: 10px 0 40px rgba(0,0,0,0.08);
+                animation: slideInPanel 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+
+            .logo-wrap {
+                display: grid;
+                grid-template-columns: repeat(2, 36px); 
+                grid-template-rows: repeat(2, 36px);
+                gap: 6px;
+                width: fit-content;
+                margin-bottom: 50px;
+                opacity: 0;
+                animation: fadeInElement 0.8s ease-out 0.6s forwards;
+            }
+
+            .logo-item {
+                background-color: #000;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 15px;
+                border-radius: 4px;
+            }
+
+            .tagline-label {
+                font-size: 10px;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #999;
+                margin-bottom: 15px;
+                display: block;
+                opacity: 0;
+                animation: fadeInElement 0.8s ease-out 0.8s forwards;
+            }
+
+            .tagline {
+                font-size: 24px;
+                line-height: 1.3;
+                color: #000;
+                font-weight: 400;
+                max-width: 380px;
+                letter-spacing: -0.5px;
+                opacity: 0;
+                animation: fadeInElement 0.8s ease-out 1s forwards;
+            }
+
+            .hamburger { top: 75px; right: 60px; }
+            .bar { background-color: #fff; } /* White bars on the image */
             
-            /* Slide in animation */
-            animation: slideInPanel 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            .nav-overlay { right: -100%; top: 0; transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+            .nav-overlay.visible { right: 0; }
         }
 
-        /* --- LOGO: FIXED 2x2 GRID --- */
-        .logo-wrap {
-            display: grid;
-            grid-template-columns: repeat(2, 36px); 
-            grid-template-rows: repeat(2, 36px);
-            gap: 6px;
-            width: fit-content;
-            margin-bottom: 50px;
+        /* --- MOBILE STYLES (Original Static Look) --- */
+        @media (max-width: 1024px) {
+            .content-panel {
+                width: 48%; 
+                height: 100%;
+                background: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start; 
+                padding: 0 8%;
+                padding-top: 115px; 
+                z-index: 10;
+            }
+
+            .logo-wrap {
+                display: grid;
+                grid-template-columns: repeat(2, 28px);
+                grid-template-rows: repeat(2, 28px);
+                gap: 5px;
+                margin-bottom: 65px;
+            }
+
+            .logo-item {
+                background-color: #000;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 12px;
+                border-radius: 5px;
+            }
+
+            .tagline {
+                font-size: 16.5px;
+                line-height: 1.5;
+                color: #1a1a1a;
+                font-weight: 300;
+                max-width: 360px;
+            }
+
+            .tagline-label { display: none; }
+
+            .hamburger { top: 40px; right: 20px; }
+            .bar { background-color: #000; } /* Black bars on the white panel */
             
-            /* Staggered entrance */
-            opacity: 0;
-            animation: fadeInElement 0.8s ease-out 0.6s forwards;
+            .nav-overlay { right: 0; top: -100%; transition: top 0.4s ease; }
+            .nav-overlay.visible { top: 0; }
         }
 
-        .logo-item {
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 15px;
-            border-radius: 4px;
-        }
-
-        .tagline-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #999;
-            margin-bottom: 15px;
-            display: block;
-            opacity: 0;
-            animation: fadeInElement 0.8s ease-out 0.8s forwards;
-        }
-
-        .tagline {
-            font-size: 24px;
-            line-height: 1.3;
-            color: #000;
-            font-weight: 400;
-            max-width: 380px;
-            letter-spacing: -0.5px;
-            opacity: 0;
-            animation: fadeInElement 0.8s ease-out 1s forwards;
-        }
-
-        /* --- NAVIGATION BUTTON (HAMBURGER) --- */
+        /* --- SHARED UI --- */
         .hamburger {
             position: absolute;
-            top: 75px;
-            right: 60px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
@@ -114,35 +164,19 @@
             gap: 7px;
         }
 
-        .bar {
-            width: 32px;
-            height: 1px;
-            background-color: #fff;
-            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .menu-active .bar { background-color: #000; box-shadow: none; }
+        .bar { width: 32px; height: 1px; transition: 0.4s ease; }
+        .menu-active .bar { background-color: #000 !important; }
         .menu-active .bar:nth-child(1) { transform: translateY(4px) rotate(45deg); }
         .menu-active .bar:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 
-        /* --- NAVIGATION OVERLAY: SLIDE-IN FROM RIGHT --- */
         .nav-overlay {
             position: fixed;
-            top: 0; 
-            right: -100%; 
-            width: 100%; 
-            height: 100%;
+            width: 100%; height: 100%;
             background: #fff;
             z-index: 900;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .nav-overlay.visible { 
-            right: 0; 
         }
 
         .overlay-inner {
@@ -151,17 +185,13 @@
             width: 85%;
             max-width: 1100px;
             gap: 60px;
-            opacity: 0;
-            transform: translateX(30px);
-            transition: all 0.5s ease 0.3s;
         }
 
-        .nav-overlay.visible .overlay-inner {
-            opacity: 1;
-            transform: translateX(0);
+        @media (max-width: 1024px) {
+            .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
         }
 
-        /* --- ORANGE PRIVACY BAR --- */
+        /* --- PRIVACY BAR --- */
         .privacy-bar {
             position: fixed;
             bottom: 0; width: 100%;
@@ -169,7 +199,7 @@
             color: #000;
             padding: 15px 0;
             text-align: center;
-            font-size: 11px;
+            font-size: 10px;
             z-index: 1001;
             font-weight: 600;
             box-shadow: 0 -8px 25px rgba(0,0,0,0.12);
@@ -177,19 +207,10 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
-        /* --- ANIMATION KEYFRAMES --- */
-        @keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
+        /* KEYFRAMES */
         @keyframes slideInPanel { from { transform: translateX(-100%); } to { transform: translateX(0); } }
         @keyframes fadeInElement { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- MOBILE RESPONSIVENESS --- */
-        @media (max-width: 1024px) {
-            .content-panel { width: 100%; padding: 0 10%; background: rgba(255,255,255,0.96); } 
-            .logo-wrap { grid-template-columns: repeat(2, 30px); grid-template-rows: repeat(2, 30px); }
-            .hamburger { top: 40px; right: 30px; }
-            .bar { background-color: #000; }
-            .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; gap: 40px; }
-        }
+        @keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
