@@ -17,6 +17,14 @@
             overflow: hidden; 
         }
 
+        /* Subtle Texture Overlay for a "premium paper" feel */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Noise_Texture.png");
+            opacity: 0.04; pointer-events: none; z-index: 999;
+        }
+
         /* --- BACKGROUND --- */
         .site-container {
             position: relative;
@@ -27,30 +35,38 @@
             background-position: 75% center; 
             display: flex;
             align-items: center;
+            animation: fadeInBg 1.5s ease-out;
         }
 
-        /* --- CONTENT PANEL --- */
+        /* --- CONTENT PANEL ENTRANCE --- */
         .content-panel {
             width: 42%; 
             height: 100%;
             background: #fff;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: center; 
             padding: 0 8%;
             position: relative;
             z-index: 10;
             box-shadow: 10px 0 40px rgba(0,0,0,0.08);
+            
+            /* Slide in animation */
+            animation: slideInPanel 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* --- LOGO: DESKTOP ALIGNMENT --- */
+        /* --- LOGO: FIXED 2x2 GRID --- */
         .logo-wrap {
-            margin-top: 115px; /* Lowered slightly for desktop balance */
             display: grid;
             grid-template-columns: repeat(2, 36px); 
             grid-template-rows: repeat(2, 36px);
             gap: 6px;
             width: fit-content;
+            margin-bottom: 50px;
+            
+            /* Staggered entrance */
+            opacity: 0;
+            animation: fadeInElement 0.8s ease-out 0.6s forwards;
         }
 
         .logo-item {
@@ -61,21 +77,32 @@
             justify-content: center;
             font-weight: 700;
             font-size: 15px;
-            border-radius: 8px;
+            border-radius: 4px;
         }
 
-        /* --- TAGLINE: DESKTOP ALIGNMENT --- */
+        .tagline-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0;
+            animation: fadeInElement 0.8s ease-out 0.8s forwards;
+        }
+
         .tagline {
-            margin-top: 65px; /* Proportional gap restored */
-            font-size: 22px;
-            line-height: 1.6;
-            color: #1a1a1a;
-            font-weight: 300;
-            max-width: 360px;
-            letter-spacing: -0.4px;
+            font-size: 24px;
+            line-height: 1.3;
+            color: #000;
+            font-weight: 400;
+            max-width: 380px;
+            letter-spacing: -0.5px;
+            opacity: 0;
+            animation: fadeInElement 0.8s ease-out 1s forwards;
         }
 
-        /* --- UI ELEMENTS --- */
+        /* --- NAVIGATION BUTTON (HAMBURGER) --- */
         .hamburger {
             position: absolute;
             top: 75px;
@@ -91,30 +118,32 @@
             width: 32px;
             height: 1px;
             background-color: #fff;
-            transition: 0.4s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
         .menu-active .bar { background-color: #000; box-shadow: none; }
         .menu-active .bar:nth-child(1) { transform: translateY(4px) rotate(45deg); }
         .menu-active .bar:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
 
-        /* --- NAVIGATION OVERLAY --- */
+        /* --- NAVIGATION OVERLAY: SLIDE-IN FROM RIGHT --- */
         .nav-overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0; 
+            right: -100%; 
+            width: 100%; 
+            height: 100%;
             background: #fff;
             z-index: 900;
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease;
+            transition: right 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .nav-overlay.visible { opacity: 1; visibility: visible; }
+        .nav-overlay.visible { 
+            right: 0; 
+        }
 
         .overlay-inner {
             display: grid;
@@ -122,6 +151,14 @@
             width: 85%;
             max-width: 1100px;
             gap: 60px;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.5s ease 0.3s;
+        }
+
+        .nav-overlay.visible .overlay-inner {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* --- ORANGE PRIVACY BAR --- */
@@ -132,7 +169,7 @@
             color: #000;
             padding: 15px 0;
             text-align: center;
-            font-size: 10px;
+            font-size: 11px;
             z-index: 1001;
             font-weight: 600;
             box-shadow: 0 -8px 25px rgba(0,0,0,0.12);
@@ -140,42 +177,25 @@
 
         .close-x { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; }
 
-        /* --- MOBILE REFINEMENTS: SMALLER & HIGHER --- */
-        @media (max-width: 1024px) {
-            .content-panel { 
-                width: 48%; 
-                padding-top: 50px; /* Shifted UP further */
-            } 
-            .logo-wrap {
-                margin-top: 0;
-                grid-template-columns: repeat(2, 28px); /* Proportional shrink */
-                grid-template-rows: repeat(2, 28px);
-                gap: 5px;
-            }
-            .logo-item { font-size: 12px; border-radius: 5px; }
-            .tagline { 
-                font-size: 16.5px; /* Slightly smaller text */
-                margin-top: 35px; /* Tighter mobile gap */
-                line-height: 1.5;
-            }
-            .hamburger { top: 40px; right: 20px; }
-            .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; }
-        }
+        /* --- ANIMATION KEYFRAMES --- */
+        @keyframes fadeInBg { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideInPanel { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+        @keyframes fadeInElement { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- DESKTOP MARGINS --- */
-        @media (min-width: 1025px) {
-            .content-panel { 
-                width: 38%; 
-                margin-left: 10%; 
-                box-shadow: -15px 0 45px rgba(0,0,0,0.12), 15px 0 45px rgba(0,0,0,0.12); 
-            }
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 1024px) {
+            .content-panel { width: 100%; padding: 0 10%; background: rgba(255,255,255,0.96); } 
+            .logo-wrap { grid-template-columns: repeat(2, 30px); grid-template-rows: repeat(2, 30px); }
+            .hamburger { top: 40px; right: 30px; }
+            .bar { background-color: #000; }
+            .overlay-inner { grid-template-columns: 1fr; overflow-y: auto; max-height: 85vh; padding-top: 60px; gap: 40px; }
         }
     </style>
 </head>
 <body>
 
     <div class="site-container">
-        <div class="content-panel">
+        <main class="content-panel">
             <div class="logo-wrap">
                 <div class="logo-item">M</div>
                 <div class="logo-item">C</div>
@@ -183,10 +203,11 @@
                 <div class="logo-item">D</div>
             </div>
 
+            <span class="tagline-label">The Advisory</span>
             <p class="tagline">
                 A public affairs advisory firm partnering with transformational companies and causes.
             </p>
-        </div>
+        </main>
 
         <div class="hamburger" id="navBtn">
             <div class="bar"></div>
@@ -204,7 +225,7 @@
 
             <div class="contact-form">
                 <h2 style="font-size: 10px; letter-spacing: 2px; color: #999; text-transform: uppercase; margin-bottom: 20px;">Inquiries</h2>
-                <form action="mailto:partners@mckd.com" method="post" enctype="text/plain">
+                <form>
                     <input type="text" placeholder="Full Name" style="width:100%; border:none; border-bottom:1px solid #ddd; padding:12px 0; margin-bottom:20px; outline:none; font-family:inherit;">
                     <input type="email" placeholder="Business Email" style="width:100%; border:none; border-bottom:1px solid #ddd; padding:12px 0; margin-bottom:20px; outline:none; font-family:inherit;">
                     <textarea rows="3" placeholder="Describe your objectives" style="width:100%; border:none; border-bottom:1px solid #ddd; padding:12px 0; margin-bottom:20px; outline:none; font-family:inherit;"></textarea>
@@ -216,22 +237,17 @@
 
     <div class="privacy-bar" id="cookieBanner">
         This website uses cookies to offer you a better browsing experience. <a href="#" style="color:#000; font-weight: 700;">Privacy Policy</a>
-        <span class="close-x" onclick="closeBanner()">✕</span>
+        <span class="close-x" onclick="document.getElementById('cookieBanner').style.display='none'">✕</span>
     </div>
 
     <script>
         const btn = document.getElementById('navBtn');
         const overlay = document.getElementById('navPanel');
-        const banner = document.getElementById('cookieBanner');
 
         btn.addEventListener('click', () => {
             btn.classList.toggle('menu-active');
             overlay.classList.toggle('visible');
         });
-
-        function closeBanner() {
-            banner.style.display = 'none';
-        }
     </script>
 </body>
 </html>
